@@ -1,13 +1,18 @@
 {
-  "name": "appupdate",
-  "version": "1.0.0",
-  "description": "",
+  "name": "cordova-adhoc-app-update",
+  "version": "0.0.1",
+  "description": "Easy update your cordova app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "main": "build/bundle.js",
+  "keywords": "cordova, phonegap, enterprise, app, update, hotupdate",
+  "repository": "github:lesion/cordova-adhoc-app-update",
+  "main": "./build/bundle.js",
+  "bin": "./bin/appupdate.js",
   "dependencies": {
-    "argparse": "^1.0.7"
+    "argparse": "^1.0.7",
+    "path": "^0.12.7",
+    "semver": "^5.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",

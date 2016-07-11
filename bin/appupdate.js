@@ -19,21 +19,31 @@ var appupdate = {
     const parser = new ArgumentParser({
       version: '1.0.0',
       addHelp: true,
-      description: 'AppUpdater example: `appupdater patch`'
+      description: 'AppUpdater example: `cordova-adhoc-app-update `'
     })
 
-    parser.addArgument(['type'], {
-      help: 'semver increment release (major | minor | patch)'
+    parser.addArgument(['-u', '--url'], {
+      help: 'manifest url'
+    })
+
+    parser.addArgument(['-c', '--changelog'], {
+      help: 'update message'
     })
 
     return parser.parseArgs()
   },
 
   init () {
+    const path = require('path')
     const args = this.parseArgs()
-    
-    // var currentPackage = require(process.cwd() + '/package.json')
-    // console.error(currentPackage)
+    const currentPackage = require(path.join(process.cwd(), '/package.json'))
+    const url = args.url || path.join(currentPackage.homepage, '/appupdate.json')
+    console.log({
+      release: currentPackage.version,
+      changelog: args.changelog || 'New release: ' + currentPackage.version,
+      url,
+      date: Date().toString()
+    })
   }
 }
 

@@ -1,22 +1,23 @@
 /* global fetch */
 /* eslint-disable camelcase */
-import semver from 'semver'
+import { gt as newestRelease } from 'semver'
 export default {
   update_url: null, // update
   current_release: '0.0.0', // app release
-  last_release: {},
+  release_url: '',
 
-  upgrade () {
-    return window.open(this.metadata.url)
-    // window.open(`itms-services://?action=download-manifest&url=${this.metadata.url}`)
+  update (ios = false) {
+    var url
+    url = ios ? `itms-services://?action=download-manifest&url=${this.release_url}` : this.release_url
+    return window.open(url)
   },
 
   /**
    * initialize appupdate & check for new update !
-   * @param  {Object} data {update_url: 'http://update.remote.server/manifest.json', '0.0.2'}
+   * @param  {Object} data {update_url: 'http://update.remote.server/manifest.json', release: '0.0.2'}
    * @return {Promise} [description]
    */
-  init (data) {
+  check (data) {
     Object.assign(this, data)
 
     if (!this.update_url) {
@@ -25,13 +26,19 @@ export default {
 
     return fetch(this.update_url)
       .then(function (response) {
+        console.error(response, 'RESPONSE !')
         if (response.status >= 400) throw new Error(response)
-
         return response.json()
       })
       .then(last_release => {
+        console.error(last_release)
         // check if remote release is newer than current one
-        return (semver.gt(last_release.release, this.current_release) ? last_release : false)
+        if (!last_release.hasOwnProperty('release')) throw new Error('`release` not found in remote manifest')
+        if (!last_release.hasOwnProperty('url')) throw new Error('`url` not found in remote manifest')
+        console.error(this)
+        this.release_url = last_release.url
+
+        return (newestRelease(last_release.release, this.current_release) ? last_release : false)
       })
   }
 }
@@ -40,7 +47,7 @@ export default {
   {
     "release": "0.0.1",
     "changelog": "- this is changed !" 
-    "plist_url": "http://myPlistURL/manifest.plist",
+    "url": "http://url.to.release/manifest.plist",
     "date" : "31237182"
   }
 */
