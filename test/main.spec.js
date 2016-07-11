@@ -9,10 +9,7 @@ chai.use(chaiAsPromised)
 
 describe('cordova-appupdate', function () {
   it('should throw if not initialized', function () {
-    return expect(appupdate.init()).to.eventually.be.rejectedWith('[AppUpdate]')
+    return expect(appupdate.check()).to.eventually.be.rejectedWith('[AppUpdate]')
   })
 
-  it('should do what...', function (done) {
-    
-  })
 })
