@@ -1,12 +1,14 @@
 {
   "name": "appupdate",
-  "version": "1.1.2",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "build/bundle.js",
-  "dependencies": {},
+  "dependencies": {
+    "argparse": "^1.0.7"
+  },
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
