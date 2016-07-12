@@ -15,7 +15,6 @@
     "path": "^0.12.7",
     "semver": "^5.2.0",
     "terminal-kit": "^0.24.12",
-    "xml2js": "^0.4.17",
     "xml2js-es6-promise": "^1.0.3"
   },
   "devDependencies": {
