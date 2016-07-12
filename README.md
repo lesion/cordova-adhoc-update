@@ -32,165 +32,58 @@ this process for you.
 npm i cordova-adhoc-app-update --save
 ```
 
-# Usage
+# CLI Usage
 
-> To authorize, use this code:
+`cordova-adhoc-app-update` comes with a beautiful cli interface that let you
+do these boring operation a breeze.
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+Let's assume you have an `.ipa` ready for production, you only need
+to make cordova-adhoc-app-update do its job:
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+cordova-adhoc-app-update
 ```
 
-```javascript
-const kittn = require('kittn');
+This command will do a lot of things starting from your cordova `config.xml` and
+your npm `package.json` files.
 
-let api = kittn.authorize('meowmeowmeow');
+1. Create a directory called `appupdate` (you can change it using __-o__ flag)
+2. Create an iOS `app.plist` file based on your current cordova configuration
+   The .plist needs a __package name__, a __version__ , the __bundle id__,
+   and url used to publish our `.ipa` package (taken from the `homepage` field of your `package.json` file or specified with the __-u__ flag) and optionally a __description__
+
+3. Create an nice `index.html` pointing to the previous created `app.plist` with 
+  the `itms-service://` stuff...
+
+4. Copy the icon specified in your `config.xml`
+
+```shell
+cd appupdate
+python3 -m http-server
+
+# or if you are a node.js guy
+http-server -p 8000 
 ```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<aside class='notice'>
+  At this point, you can serve content from `appupdate` directory with a http-server and open the page from your device or locally at `http://localhost:8000`
 </aside>
 
-# Kittens
+5. Create a `manifest.json` with all the info needed by the client to know if this is a new release or the current one
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
+# JS Usage
 
 ```javascript
-const kittn = require('kittn');
+import appupdate from 'cordova-adhoc-app-update'
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+appupdate.check('http://url.where.appupdate.json.is', current_app_release )
+  .then( (rel) => {
+    console.log('Hey man, we have a new release here')
+    console.log('is the %s', rel.release)
+    console.log('with this changelog: %s', rel.changelog)
+    
+    // if you wanna update
+    appupdate.update()
+  })
+
 ```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
+webpack ES6 usage
