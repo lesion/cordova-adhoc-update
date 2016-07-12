@@ -2,14 +2,14 @@
 
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
-import appupdate from '../appupdate'
+import appUpdate from '../cordova-adhoc-app-update'
 const expect = chai.expect
 
 chai.use(chaiAsPromised)
 
-describe('cordova-appupdate', function () {
+describe('cordova-adhoc-app-update', function () {
   it('should throw if not initialized', function () {
-    return expect(appupdate.check()).to.eventually.be.rejectedWith('[AppUpdate]')
+    return expect(appUpdate.check()).to.eventually.be.rejectedWith('[AppUpdate]')
   })
 
 })
