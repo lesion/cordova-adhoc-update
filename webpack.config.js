@@ -1,9 +1,9 @@
 module.exports = {
-  entry: './appupdate.js',
+  entry: './cordova-app-uploader.js',
   output: {
     path: __dirname + '/build',
     filename: 'bundle.js',
-    library: 'apploader',
+    library: 'cordova-app-uploader',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

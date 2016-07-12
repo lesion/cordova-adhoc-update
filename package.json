@@ -1,12 +1,12 @@
 {
-  "name": "cordova-adhoc-app-update",
+  "name": "cordova-adhoc-update",
   "version": "0.1.0",
   "description": "Easy update your cordova app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": "cordova, phonegap, enterprise, app, update, hotupdate",
-  "repository": "github:lesion/cordova-adhoc-app-update",
+  "repository": "github:lesion/cordova-adhoc-update",
   "main": "./build/bundle.js",
   "bin": "./bin/appupdate.js",
   "dependencies": {
@@ -28,6 +28,6 @@
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
-  "author": "Rocco De Patto <rocco.depatto@gmail.com> (http://lesion.github.io/)",
-  "license": "ISC"
+  "author": "<lesion@autistici.org> (http://lesion.github.io/)",
+  "license": "GPL3"
 }

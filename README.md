@@ -2,7 +2,7 @@
 # Introduction
 
 Few lines and some examples to show you how 
-`cordova-adhoc-app-update` works.
+`cordova-adhoc-update` works.
 First of all, forget this is something you can use
 for public app (published in stores), you want to
 use this only for adhoc / enterprise app.
@@ -14,26 +14,26 @@ the link (ok, you have to prepare a landing page
 with a link pointing to itms-something and a properly
 written `.plist`).
 
-What cordova-adhoc-app-update does is to automate
+What cordova-adhoc-update does is to automate
 this process for you.
 
 # Installation
 
 
 ```shell
-npm i cordova-adhoc-app-update --save
+npm i cordova-adhoc-update --save
 ```
 
 # CLI Usage
 
-`cordova-adhoc-app-update` comes with a beautiful cli interface that let you
+`cordova-adhoc-update` comes with a beautiful cli interface that let you
 do these boring operation a breeze.
 
 Let's assume you have an `.ipa` ready for production, you only need
-to make cordova-adhoc-app-update do its job:
+to make cordova-adhoc-update do its job:
 
 ```shell
-cordova-adhoc-app-update
+cordova-adhoc-update
 ```
 
 This command will do a lot of things starting from your cordova `config.xml` and
@@ -65,7 +65,7 @@ http-server -p 8000
 # JS Usage
 
 ```javascript
-import appupdate from 'cordova-adhoc-app-update'
+import appupdate from 'cordova-adhoc-update'
 
 appupdate.check('http://url.where.appupdate.json.is', current_app_release )
   .then( (rel) => {

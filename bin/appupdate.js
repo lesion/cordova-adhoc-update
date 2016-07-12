@@ -16,7 +16,7 @@ var appupdate = {
     const parser = new ArgumentParser({
       version: '1.0.0',
       addHelp: true,
-      description: '`cordova-adhoc-app-update`'
+      description: '`cordova-adhoc-update`'
     })
 
     parser.addArgument(['-u', '--url'], {
