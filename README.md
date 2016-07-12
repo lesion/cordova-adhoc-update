@@ -1,11 +1,3 @@
----
-title: API Reference
-
-toc_footers:
-  - <a href='https://github.com/lesion/cordova-adhoc-app-update'>Github repo</a>
-
-search: true
----
 
 # Introduction
 
@@ -86,4 +78,3 @@ appupdate.check('http://url.where.appupdate.json.is', current_app_release )
   })
 
 ```
-webpack ES6 usage
