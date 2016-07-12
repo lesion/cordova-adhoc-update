@@ -109,7 +109,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://github.com/lesion/cordova-adhoc-app-update'>Github repo</a></li>
+            <li><a href='https://github.com/lesion/cordova-adhoc-update'>Github repo</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -118,7 +118,7 @@
         <h1 id="introduction">Introduction</h1>
 
 <p>Few lines and some examples to show you how 
-<code class="prettyprint">cordova-adhoc-app-update</code> works.
+<code class="prettyprint">cordova-adhoc-update</code> works.
 First of all, forget this is something you can use
 for public app (published in stores), you want to
 use this only for adhoc / enterprise app.</p>
@@ -130,21 +130,21 @@ the link (ok, you have to prepare a landing page
 with a link pointing to itms-something and a properly
 written <code class="prettyprint">.plist</code>).</p>
 
-<p>What cordova-adhoc-app-update does is to automate
+<p>What cordova-adhoc-update does is to automate
 this process for you.</p>
 
 <h1 id="installation">Installation</h1>
-<pre class="highlight shell"><code>npm i cordova-adhoc-app-update --save
+<pre class="highlight shell"><code>npm i cordova-adhoc-update --save
 </code></pre>
 
 <h1 id="cli-usage">CLI Usage</h1>
 
-<p><code class="prettyprint">cordova-adhoc-app-update</code> comes with a beautiful cli interface that let you
+<p><code class="prettyprint">cordova-adhoc-update</code> comes with a beautiful cli interface that let you
 do these boring operation a breeze.</p>
 
 <p>Let&rsquo;s assume you have an <code class="prettyprint">.ipa</code> ready for production, you only need
-to make cordova-adhoc-app-update do its job:</p>
-<pre class="highlight shell"><code>cordova-adhoc-app-update
+to make cordova-adhoc-update do its job:</p>
+<pre class="highlight shell"><code>cordova-adhoc-update
 </code></pre>
 
 <p>This command will do a lot of things starting from your cordova <code class="prettyprint">config.xml</code> and
@@ -175,7 +175,7 @@ http-server -p 8000
 </ol>
 
 <h1 id="js-usage">JS Usage</h1>
-<pre class="highlight javascript"><code><span class="kr">import</span> <span class="nx">appupdate</span> <span class="nx">from</span> <span class="s1">'cordova-adhoc-app-update'</span>
+<pre class="highlight javascript"><code><span class="kr">import</span> <span class="nx">appupdate</span> <span class="nx">from</span> <span class="s1">'cordova-adhoc-update'</span>
 
 <span class="nx">appupdate</span><span class="p">.</span><span class="nx">check</span><span class="p">(</span><span class="s1">'http://url.where.appupdate.json.is'</span><span class="p">,</span> <span class="nx">current_app_release</span> <span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">rel</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
