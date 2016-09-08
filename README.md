@@ -2,6 +2,9 @@
 
 ## [Documentation](http://lesion.github.io/cordova-adhoc-update)
 
+# Compatible with:
+ - iOS
+ - Android (working on it, PR welcome)
 
 # Introduction
 
@@ -78,7 +81,7 @@ appupdate.check('http://url.where.appupdate.json.is', current_app_release )
     console.log('with this changelog: %s', rel.changelog)
     
     // if you wanna update
-    appupdate.update()
+    appupdate.update(true)
   })
 
 ```

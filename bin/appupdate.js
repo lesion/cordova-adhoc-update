@@ -69,7 +69,7 @@ var appupdate = {
       const releaseData = {
         release: widget.$.version,
         changelog: args.changelog || 'New release: ' + widget.$.version,
-        url: `${path.join(widget.url, widget.name[0])}.${widget.$.version}.ipa`,
+        url: `${path.join(widget.url, 'app.plist')}`,
         date: Date().toString()
       }
 
