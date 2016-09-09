@@ -59,6 +59,11 @@ var appupdate = {
       const outputDir = args.output || 'appupdate'
       widget.url = args.url || npmPackage.homepage
 
+      if (!widget.url) {
+        error()('Please specify `homepage` field in your package.json or -u arg\n')
+        return
+      }
+
       fs.ensureDirSync(outputDir)
 
       if (npmPackage.version !== widget.$.version) {
