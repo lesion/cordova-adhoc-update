@@ -35,7 +35,7 @@ module.exports = function (widget) {
         <key>kind</key>
         <string>software</string>
         <key>bundle-version</key>
-        <string>${widget.version}</string>
+        <string>${widget.$.version}</string>
         <key>title</key>
         <string>${widget.name[0]}</string>
         <key>subtitle</key>
