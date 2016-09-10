@@ -81,13 +81,16 @@ var appupdate = {
       info()('NAME    ').bold.blue(`${npmPackage.name}\n`)
       info()('BUNDLE  ').bold.blue(`${widget.$.id}\n`)
       info()('RELEASE ').bold.blue(`${releaseData.release}\n`)
-      info()('ICON    ').bold.blue(`${widget.icon[0].$.src}\n`)
-
-      fs.copy(widget.icon[0].$.src, path.join(outputDir, 'icon.png'))
-        .then(e => {
-          info()('Icon copied!\n')
-        })
-        .catch(e => warning()('No icon found in ' + e).bold.yellow(widget.icon[0].$.src + '\n'))
+      if (!widget.icon) {
+        error()('ICON not found in config.xml\n')
+      } else {
+        info()('ICON    ').bold.blue(`${widget.icon[0].$.src}\n`)
+        fs.copy(widget.icon[0].$.src, path.join(outputDir, 'icon.png'))
+          .then(e => {
+            info()('Icon copied!\n')
+          })
+          .catch(e => warning()('No icon found in ' + e).bold.yellow(widget.icon[0].$.src + '\n'))
+      }
 
       const files = [
         { name: 'app.plist', content: plistTpl(widget) },
@@ -111,7 +114,11 @@ var appupdate = {
         })
       })
     })
-    .catch(e => error()('config.xml not found! Are you in a cordova project? \n'))
+    .catch(e => { 
+      error()('config.xml not found! Are you in a cordova project? \n') 
+      console.error(e)
+      console.stack()
+    } )
   }
 }
 
