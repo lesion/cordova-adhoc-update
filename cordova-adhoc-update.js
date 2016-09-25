@@ -9,7 +9,7 @@ export default {
   update (ios = false) {
     var url
     url = ios ? `itms-services://?action=download-manifest&url=${this.release_url}` : this.release_url
-    return window.open(url)
+    return window.open(url, '_system')
   },
 
   /**

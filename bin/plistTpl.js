@@ -25,7 +25,7 @@ module.exports = function (widget) {
           <key>kind</key>
           <string>software-package</string>
           <key>url</key>
-          <string>${path.join(widget.url, widget.name[0])}.${widget.$.version}.ipa</string>
+          <string>${widget.url}{widget.name[0])}.${widget.$.version}.ipa</string>
         </dict>
       </array>
       <key>metadata</key>

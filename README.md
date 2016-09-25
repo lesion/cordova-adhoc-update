@@ -2,6 +2,10 @@
 
 ## [Documentation](http://lesion.github.io/cordova-adhoc-update)
 
+### DANGER ###
+This is an experiment! Do not use in production 
+
+
 # Compatible with:
  - iOS
  - Android (working on it, PR welcome)

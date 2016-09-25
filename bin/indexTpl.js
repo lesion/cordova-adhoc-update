@@ -36,7 +36,7 @@ module.exports = function (widget) {
   </style>
 </head>
 <body>
-  <a href="itms-services://?action=download-manifest&url=${path.join(widget.url, 'app.plist')}">
+  <a href="itms-services://?action=download-manifest&url=${widget.url}app.plist">
     <img src='icon.png'></a>
     <h1>${widget.name} ${widget.$.version}</h1>
   </a>
