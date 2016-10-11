@@ -1,6 +1,4 @@
 module.exports = function (widget) {
-  const path = require('path')
-
   // check if we have a package name
   if (!widget.name) throw new Error('package name not found in package.json!!!')
 
@@ -25,7 +23,7 @@ module.exports = function (widget) {
           <key>kind</key>
           <string>software-package</string>
           <key>url</key>
-          <string>${widget.url}{widget.name[0])}.${widget.$.version}.ipa</string>
+          <string>${widget.url}${widget.name[0]}.${widget.$.version}.ipa</string>
         </dict>
       </array>
       <key>metadata</key>

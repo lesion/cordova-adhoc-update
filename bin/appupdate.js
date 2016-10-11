@@ -14,7 +14,7 @@ var appupdate = {
   parseArgs () {
     const ArgumentParser = require('argparse').ArgumentParser
     const parser = new ArgumentParser({
-      version: '1.0.0',
+      version: '1.1.0',
       addHelp: true,
       description: '`cordova-adhoc-update`'
     })
@@ -54,7 +54,7 @@ var appupdate = {
     let npmPackage = null
 
     try {
-      npmPackage = require(path.join(process.cwd(), 'package.json'))
+      npmPackage = require(path.join(cwd, 'package.json'))
     } catch (e) {
       error()('No package.json found in current directory !')
       return
@@ -82,21 +82,17 @@ var appupdate = {
         const releaseData = {
           release: widget.$.version,
           changelog: args.changelog || 'New release: ' + widget.$.version,
-          url: `${widget.url.replace(/\/$/,'')}/app.plist`,
+          url: `${widget.url.replace(/\/$/, '')}/app_${widget.$.version}.plist`,
           date: Date().toString()
         }
 
-        info()('NAME    ').bold.blue(`${npmPackage.name}
-`)
-        info()('BUNDLE  ').bold.blue(`${widget.$.id}
-`)
-        info()('RELEASE ').bold.blue(`${releaseData.release}
-`)
+        info()('NAME    ').bold.blue(`${npmPackage.name}\n`)
+        info()('BUNDLE  ').bold.blue(`${widget.$.id}\n`)
+        info()('RELEASE ').bold.blue(`${releaseData.release}\n`)
         if (!widget.icon) {
           error()('ICON not found in config.xml\n')
         } else {
-          info()('ICON    ').bold.blue(`${widget.icon[0].$.src}
-`)
+          info()('ICON    ').bold.blue(`${widget.icon[0].$.src}\n`)
           fs.copy(widget.icon[0].$.src, path.join(outputDir, 'icon.png'))
             .then(e => {
               info()('Icon copied!\n')
@@ -105,7 +101,7 @@ var appupdate = {
         }
 
         const files = [
-          { name: 'app.plist', content: plistTpl(widget) },
+          { name: `app_${releaseData.release}.plist`, content: plistTpl(widget) },
           { name: 'appupdate.json', content: JSON.stringify(releaseData, null, 2) },
           { name: 'index.html', content: indexTpl(widget) }
         ]
@@ -114,13 +110,13 @@ var appupdate = {
         if (args.package) {
           const packagePath = `${path.join(outputDir, widget.name[0])}.${widget.$.version}.ipa`
           fs.copy(args.package, packagePath)
-            .then(info()('Moving ').bold.blue(args.package).blue(' to ').bold.blue(packagePath + '\n'))
-            .catch(error())
+            .then(info()('Copy ').bold.blue(args.package).blue(' to ').bold.blue(packagePath + '\n'))
+            .catch(error)
         }
 
         files.forEach(file => {
           fs.writeFile(path.join(outputDir, file.name), file.content)
-            .then(() => info()('Writing file %s\n', path.join(outputDir, file.name)))
+            .then(() => info()('writeFile file %s\n', path.join(outputDir, file.name)))
             .catch(e => {
               error()(e + '\n')
             })
